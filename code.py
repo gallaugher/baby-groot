@@ -1,51 +1,41 @@
-# Fixed earlier problem with long comments & no time import.
-# Thanks Taco Wijnsma for pointing out that I'd posted the wrong code.
+# groot.py
+import board, touchio, digitalio
+from audiopwmio import PWMAudioOut as AudioOut # for CPB & Pico
+from audiocore import WaveFile # only needed for wav
 
-# Press A to make it less touch sensitive (increasing threshold)
-# Press B to make it more touch sensitive (decreasing threshold)
+# set up the speaker
+speaker = digitalio.DigitalInOut(board.SPEAKER_ENABLE)
+speaker.direction = digitalio.Direction.OUTPUT
+speaker.value = True
+audio = AudioOut(board.SPEAKER)
 
-# For this code to work, your CPX must have four files on it, each named:
-# I_am_groot_1.wav, I_am_groot_2.wav, I_am_groot_3.wav, and I_am_groot_4.wav
-# The code cycles through these four sounds, each time a capacitive touch on
-# CPX is registered (e.g. when you touch Groot's leaves).
-# You can easily save different files and use those, but...
-# files must be 22,050 kHz, 16-bit, mono (or less) WAV files
-# I simply recorded YouTube videos of Baby Groot using a ScreenFlow
-# screencast, edited out video, cropped the sound, then exported the audio.
-# I then downloaded Audacity and used this product to lower the sound
-# quality to 22,050 kHz and 16 bit. If you search online you can find several
-# good Audacity tutorials. You can likely also record sound from video
-# playing on your phone or computer using iOS video capture or QuickTime for
-# the Mac.
+# if you want to set up a single touchpad on A1 & refer to it as touchpad_A1
+touchpad_A4 = touchio.TouchIn(board.A4)
 
-#   More detail on using sound files with CPX can be found at:
-#   https://learn.adafruit.com/circuitpython-made-easy-on-circuit-playground-express/play-file
-#   Info on this project is at:
+# set path where sound files can be found CHANGE if different folder name
+path = "groot-wavs/"
 
-import time
-import touchio
-from adafruit_circuitplayground.express import cpx
-cpx.play_file("I_am_groot_1.wav")
-soundNumber = 1
-# Plugged into USB, higher # below is better.
-# Battery = less power, so 200 workded well for me.
-# 500 was what I had been using.
-touch_threshold = 750
-cpx.adjust_touch_threshold(touch_threshold)
+# play_sound function - pass in the FULL NAME of file to play
+def play_sound(filename):
+    with open(path + filename, "rb") as wave_file:
+        wave = WaveFile(wave_file)
+        audio.play(wave)
+        while audio.playing:
+            pass
 
+file_number = 1
+
+print("Groot running!")
 while True:
-    if cpx.touch_A1:
-        print("Touched A1!")
-        cpx.play_file("I_am_groot_" + str(soundNumber) + ".wav")
-        if soundNumber < 4:
-            soundNumber = soundNumber + 1
-        else:
-            soundNumber = 1
-    elif cpx.button_a:
-        touch_threshold = touch_threshold + 50
-        print("touch_threshold is:", touch_threshold)
-    elif cpx.button_b:
-        touch_threshold = touch_threshold - 50
-        print("touch_threshold is:", touch_threshold)
-
-    time.sleep(0.1)
+    # detect single touchpad touch - statement below is True if touched
+    if touchpad_A4.value:
+        print(f"I_am_groot_{file_number}.wav")
+        play_sound(f"I_am_groot_{file_number}.wav")
+        # modulo operator
+        file_number = (file_number % 4) + 1 # gets remainder & adds 1
+        # terinary operator
+        # file_number = file_number + 1 if file_number < 4 else 1 # do if true if true/false do if false
+        # with if conditional
+        # file_number += 1
+        # if file_number > 4:
+        #     file_number = 1
