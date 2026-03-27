@@ -7,3 +7,8 @@ https://medium.com/@gallaugher/build-a-talking-baby-groot-using-circuit-playgrou
 
 There is a 3D print my students use as a succlent planter here:
 https://www.thingiverse.com/thing:2836387/files
+
+Parts:
+- CircuitPlayground Bluefruit or Express - https://www.adafruit.com/product/4333 or https://www.adafruit.com/product/3333
+- One dual-ended Aligator Clip - https://www.adafruit.com/product/1592
+- Capacigtive Touch Thread - https://www.adafruit.com/product/603
