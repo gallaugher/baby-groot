@@ -3,7 +3,8 @@
 Tap a plant, Groot talks!
 Easily modified to make most anything conductive (plants, pumpkins) play a sound when touched.
 
-Build video at:
+Build video:
+
 [![Watch the video](https://img.youtube.com/vi/gEmyZ7ZWMIo/hqdefault.jpg)](https://youtu.be/gEmyZ7ZWMIo)
 
 There is a 3D print my students use as a succlent planter here:
