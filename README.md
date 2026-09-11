@@ -5,7 +5,7 @@ Easily modified to make most anything conductive (plants, pumpkins) play a sound
 
 Build video:
 
-[![Watch the video](https://img.youtube.com/vi/gEmyZ7ZWMIo/hqdefault.jpg)](https://youtu.be/gEmyZ7ZWMIo)
+[![Watch the video](https://img.youtube.com/vi/gEmyZ7ZWMIo/hqdefault.jpg)](https://youtu.be/gEmyZ7ZWMIo?si=09bIb88imaCPivu0)
 
 There is a 3D print my students use as a succlent planter here:
 https://www.thingiverse.com/thing:2836387/files
